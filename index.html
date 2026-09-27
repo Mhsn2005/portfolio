@@ -3,223 +3,266 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mohammad Hossein Salehy Nezhad</title>
-  <meta name="description" content="Full-stack developer · Healthcare systems · TRT.co · Ranked 26th in Konkoor" />
+  <title>Mohammad Hossein Salehy Nezhad — Full-stack Developer</title>
+  <meta name="description" content="Full-stack developer at TRT.co. Healthcare systems, Angular, .NET Core, Three.js. Ranked 26th in Konkoor. Amirkabir University of Technology." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <canvas id="fluid"></canvas>
-  <div class="noise"></div>
-  <div class="scanlines"></div>
+  <canvas id="bg"></canvas>
 
-  <nav class="nav">
-    <a href="#" class="logo">MHSN<span>_</span></a>
-    <div class="nav-links">
-      <a href="#about" data-text="ABOUT">ABOUT</a>
-      <a href="#xp" data-text="XP">XP</a>
-      <a href="#stack" data-text="STACK">STACK</a>
-      <a href="#contact" data-text="CONTACT">CONTACT</a>
-    </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
+  <header class="header">
+    <a href="#" class="logo">mhsn</a>
+    <nav class="nav" id="nav">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
     </button>
-  </nav>
+  </header>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about">ABOUT</a>
-    <a href="#xp">XP</a>
-    <a href="#stack">STACK</a>
-    <a href="#contact">CONTACT</a>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero-glitch" data-text="MOHAMMAD HOSSEIN">MOHAMMAD HOSSEIN</div>
-    <h1 class="hero-name">
-      <span class="line">SALEHY</span>
-      <span class="line accent">NEZHAD</span>
-    </h1>
-    <p class="hero-tag">FULL-STACK // HEALTHCARE SYSTEMS // TRT.CO</p>
-    <div class="hero-meta">
-      <span>KONKOOR #26</span>
-      <span class="dot">●</span>
-      <span>AMIRKABIR CE</span>
-      <span class="dot">●</span>
-      <span>TEHRAN</span>
-    </div>
-    <a href="#about" class="scroll-hint">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
-    </a>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <div class="section-label">01 — IDENTITY</div>
-    <h2 class="section-title reveal">About</h2>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>Final-year Computer Engineering student at <strong>Amirkabir University of Technology</strong>. Currently building medical software at <strong>TRT.co</strong> in Tehran.</p>
-        <p>I ship real systems used in hospitals — 3D anatomical visualization, PACS viewers, kiosk monitors, and voice-to-text for clinical workflows. Also take selected freelance work.</p>
-        <p>Ranked <strong>26th</strong> in Iran’s National University Entrance Exam (Konkoor).</p>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <p class="hero-label fade-up">Full-stack Developer · TRT.co · Tehran</p>
+      <h1 class="hero-title fade-up">
+        Mohammad Hossein<br />
+        <em>Salehy Nezhad</em>
+      </h1>
+      <p class="hero-desc fade-up">
+        I build production software for healthcare — 3D medical visualization,
+        PACS imaging, hospital systems — and full-stack B2B products.
+      </p>
+      <div class="hero-actions fade-up">
+        <a href="#work" class="btn">View work</a>
+        <a href="mailto:MohammadHosseinSalehyNezhad@gmail.com" class="btn btn-outline">Email me</a>
       </div>
-      <div class="about-stats">
-        <div class="stat reveal">
-          <span class="stat-val">#26</span>
-          <span class="stat-key">Konkoor</span>
-        </div>
-        <div class="stat reveal">
-          <span class="stat-val">TRT.co</span>
-          <span class="stat-key">Day Job</span>
-        </div>
-        <div class="stat reveal">
-          <span class="stat-val">MED</span>
-          <span class="stat-key">Domain</span>
-        </div>
+      <div class="hero-bar fade-up">
+        <span>Konkoor <strong>#26</strong></span>
+        <span class="sep"></span>
+        <span>Amirkabir University of Technology</span>
+        <span class="sep"></span>
+        <span>CE · Final year</span>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EXPERIENCE -->
-  <section class="section" id="xp">
-    <div class="section-label">02 — EXPERIENCE</div>
-    <h2 class="section-title reveal">At TRT.co</h2>
-    <div class="xp-list">
-      <article class="xp-card reveal">
-        <div class="xp-num">01</div>
-        <div class="xp-body">
-          <h3>3D Anatomical Body</h3>
-          <p>Interactive 3D human body for medical education & visualization.</p>
-          <div class="xp-tags"><span>Blender</span><span>Three.js</span></div>
-        </div>
-      </article>
-      <article class="xp-card reveal">
-        <div class="xp-num">02</div>
-        <div class="xp-body">
-          <h3>PACS Viewer</h3>
-          <p>Medical imaging viewer for PACS workflows.</p>
-          <div class="xp-tags"><span>Cornerstone.js</span><span>PACS</span></div>
-        </div>
-      </article>
-      <article class="xp-card reveal">
-        <div class="xp-num">03</div>
-        <div class="xp-body">
-          <h3>ShafaPMonitor</h3>
-          <p>Patient status monitor for hospital kiosks (patient companions).</p>
-          <div class="xp-tags"><span>Full-stack</span><span>Kiosk</span></div>
-        </div>
-      </article>
-      <article class="xp-card reveal">
-        <div class="xp-num">04</div>
-        <div class="xp-body">
-          <h3>Medical Voice-to-Text</h3>
-          <p>Speech-to-text solution for clinical use — in progress.</p>
-          <div class="xp-tags"><span>Speech</span><span>Medical AI</span></div>
-        </div>
-      </article>
-    </div>
+    <!-- WORK -->
+    <section class="section" id="work">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Selected work</h2>
+      </div>
 
-    <h2 class="section-title reveal" style="margin-top: 4rem;">Freelance</h2>
-    <div class="xp-list">
-      <article class="xp-card reveal">
-        <div class="xp-num">F1</div>
-        <div class="xp-body">
-          <h3>YazdanParts</h3>
-          <p>Published B2B platform for parts & commerce.</p>
-          <div class="xp-tags"><span>Angular</span><span>.NET Core</span></div>
-        </div>
-      </article>
-      <article class="xp-card reveal">
-        <div class="xp-num">F2</div>
-        <div class="xp-body">
-          <h3>Netball Federation App</h3>
-          <p>Application development with the Netball Federation.</p>
-          <div class="xp-tags"><span>React</span><span>Domain</span></div>
-        </div>
-      </article>
-    </div>
-  </section>
+      <div class="work-group">
+        <h3 class="work-group-title">At TRT.co</h3>
+        <div class="work-grid">
+          <article class="work-card fade-up">
+            <div class="work-card-top">
+              <span class="work-tag">Medical · 3D</span>
+            </div>
+            <h4>3D Anatomical Body</h4>
+            <p>Interactive 3D human body for medical education and visualization. Modeled in Blender, rendered in the browser with Three.js.</p>
+            <div class="work-stack">
+              <span>Blender</span><span>Three.js</span><span>WebGL</span>
+            </div>
+          </article>
 
-  <!-- STACK -->
-  <section class="section" id="stack">
-    <div class="section-label">03 — STACK</div>
-    <h2 class="section-title reveal">Tech</h2>
-    <div class="stack-grid">
-      <div class="stack-group reveal">
-        <h3>Frontend</h3>
-        <div class="stack-items">
-          <span>Angular</span><span>React</span><span>TypeScript</span>
-          <span>Three.js</span><span>Cornerstone.js</span>
+          <article class="work-card fade-up">
+            <div class="work-card-top">
+              <span class="work-tag">Medical Imaging</span>
+            </div>
+            <h4>PACS Viewer</h4>
+            <p>Medical imaging viewer for PACS workflows using Cornerstone.js — viewing and interaction with clinical image studies.</p>
+            <div class="work-stack">
+              <span>Cornerstone.js</span><span>PACS</span><span>DICOM</span>
+            </div>
+          </article>
+
+          <article class="work-card fade-up">
+            <div class="work-card-top">
+              <span class="work-tag">Hospital Systems</span>
+            </div>
+            <h4>ShafaPMonitor</h4>
+            <p>Patient status monitoring for hospital kiosks, used by patient companions (همراهان بیمار) on the ground.</p>
+            <div class="work-stack">
+              <span>Full-stack</span><span>Kiosk UI</span><span>Healthcare</span>
+            </div>
+          </article>
+
+          <article class="work-card fade-up">
+            <div class="work-card-top">
+              <span class="work-tag">In progress</span>
+            </div>
+            <h4>Medical Voice-to-Text</h4>
+            <p>Speech-to-text pipeline aimed at clinical documentation and medical use cases.</p>
+            <div class="work-stack">
+              <span>Speech</span><span>Medical AI</span>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="stack-group reveal">
-        <h3>Backend</h3>
-        <div class="stack-items">
-          <span>C#</span><span>.NET Core</span><span>ASP.NET</span>
-          <span>Clean Arch</span><span>Dapper</span><span>JWT</span>
+
+      <div class="work-group">
+        <h3 class="work-group-title">Freelance</h3>
+        <div class="work-grid">
+          <article class="work-card fade-up">
+            <div class="work-card-top">
+              <span class="work-tag">B2B · Published</span>
+            </div>
+            <h4>YazdanParts</h4>
+            <p>End-to-end B2B platform for parts and commerce. Built with Angular and .NET Core, shipped to production.</p>
+            <div class="work-stack">
+              <span>Angular</span><span>.NET Core</span><span>SQL Server</span>
+            </div>
+          </article>
+
+          <article class="work-card fade-up">
+            <div class="work-card-top">
+              <span class="work-tag">Sports · Domain</span>
+            </div>
+            <h4>Netball Federation App</h4>
+            <p>Application development with the Netball Federation — statistics, reporting, and related product work.</p>
+            <div class="work-stack">
+              <span>React</span><span>Domain modeling</span>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="stack-group reveal">
-        <h3>Specialized</h3>
-        <div class="stack-items">
-          <span>Blender</span><span>PACS</span><span>SQL Server</span>
-          <span>Docker</span><span>Git</span>
+
+      <div class="work-group">
+        <h3 class="work-group-title">Other</h3>
+        <div class="work-grid work-grid-3">
+          <article class="work-card fade-up">
+            <h4>TOEFL Listening API</h4>
+            <p>Clean Architecture .NET microservice: JWT, audio streaming, scoring, analytics.</p>
+            <div class="work-stack"><span>C#</span><span>ASP.NET Core</span><span>Docker</span></div>
+          </article>
+          <article class="work-card fade-up">
+            <h4>Code Transformer</h4>
+            <p>Multi-language formatter and live diff tool with dark mode.</p>
+            <div class="work-stack"><span>JavaScript</span><span>CodeMirror</span></div>
+          </article>
+          <article class="work-card fade-up">
+            <h4>Collaborative Drawing</h4>
+            <p>Real-time multi-client canvas with auth and SQLite.</p>
+            <div class="work-stack"><span>Java</span><span>JavaFX</span><span>Sockets</span></div>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- OTHER -->
-  <section class="section" id="other">
-    <div class="section-label">04 — OTHER</div>
-    <h2 class="section-title reveal">Selected Work</h2>
-    <div class="xp-list">
-      <article class="xp-card reveal">
-        <div class="xp-num">U1</div>
-        <div class="xp-body">
-          <h3>TOEFL Listening Microservice</h3>
-          <p>Clean Architecture .NET backend — JWT, audio streaming, scoring, analytics.</p>
-          <div class="xp-tags"><span>C#</span><span>ASP.NET Core</span><span>Docker</span></div>
-        </div>
-      </article>
-      <article class="xp-card reveal">
-        <div class="xp-num">U2</div>
-        <div class="xp-body">
-          <h3>Code Transformer</h3>
-          <p>Multi-language formatter & live diff with dark mode.</p>
-          <div class="xp-tags"><span>JS</span><span>CodeMirror</span></div>
-        </div>
-      </article>
-      <article class="xp-card reveal">
-        <div class="xp-num">U3</div>
-        <div class="xp-body">
-          <h3>Collaborative Drawing</h3>
-          <p>Real-time multi-client canvas with auth & SQLite.</p>
-          <div class="xp-tags"><span>Java</span><span>JavaFX</span><span>Sockets</span></div>
-        </div>
-      </article>
-    </div>
-  </section>
+    <!-- SKILLS -->
+    <section class="section section-alt" id="skills">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Skills</h2>
+      </div>
+      <p class="section-lead fade-up">What I use in production and what I reach for when the problem needs it.</p>
 
-  <!-- CONTACT -->
-  <section class="section contact-section" id="contact">
-    <div class="section-label">05 — LINK</div>
-    <h2 class="section-title reveal">Connect</h2>
-    <p class="contact-text reveal">Currently at TRT.co. Open to full-stack, healthcare, and backend conversations.</p>
-    <div class="contact-links reveal">
-      <a href="mailto:MohammadHosseinSalehyNezhad@gmail.com" class="contact-btn">EMAIL</a>
-      <a href="https://github.com/Mhsn2005" target="_blank" rel="noopener" class="contact-btn ghost">GITHUB</a>
-    </div>
-    <p class="contact-email reveal">MohammadHosseinSalehyNezhad@gmail.com</p>
-  </section>
+      <div class="skills-grid">
+        <div class="skill-block fade-up">
+          <h3>Frontend</h3>
+          <ul>
+            <li>Angular</li>
+            <li>React</li>
+            <li>TypeScript / JavaScript</li>
+            <li>Three.js / WebGL</li>
+            <li>Cornerstone.js</li>
+          </ul>
+        </div>
+        <div class="skill-block fade-up">
+          <h3>Backend</h3>
+          <ul>
+            <li>C# / .NET Core</li>
+            <li>ASP.NET Core</li>
+            <li>Clean Architecture</li>
+            <li>Dapper / SQL Server</li>
+            <li>JWT & API design</li>
+          </ul>
+        </div>
+        <div class="skill-block fade-up">
+          <h3>Domain & tools</h3>
+          <ul>
+            <li>Medical imaging (PACS)</li>
+            <li>3D (Blender)</li>
+            <li>Docker</li>
+            <li>Git</li>
+            <li>Hospital / kiosk UIs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="about-layout">
+        <div class="about-copy fade-up">
+          <p>
+            I’m a final-year Computer Engineering student at
+            <strong>Amirkabir University of Technology</strong> (Tehran Polytechnic)
+            and a software developer at <strong>TRT.co</strong>.
+          </p>
+          <p>
+            Ranked <strong>26th</strong> in Iran’s National University Entrance Exam (Konkoor).
+          </p>
+          <p>
+            Most of my recent work sits in healthcare and enterprise products:
+            systems that have to be reliable, clear, and usable by non-engineers
+            in real environments (hospitals, kiosks, B2B workflows).
+          </p>
+          <p>
+            I care about clean architecture, maintainable code, and shipping
+            software people actually use.
+          </p>
+        </div>
+        <aside class="about-aside fade-up">
+          <div class="aside-item">
+            <span class="aside-label">Role</span>
+            <span class="aside-value">Developer @ TRT.co</span>
+          </div>
+          <div class="aside-item">
+            <span class="aside-label">Education</span>
+            <span class="aside-value">CE · Amirkabir · Final year</span>
+          </div>
+          <div class="aside-item">
+            <span class="aside-label">Konkoor</span>
+            <span class="aside-value">Rank 26</span>
+          </div>
+          <div class="aside-item">
+            <span class="aside-label">Focus</span>
+            <span class="aside-value">Healthcare · Full-stack</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section-contact" id="contact">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Contact</h2>
+      </div>
+      <p class="contact-lead fade-up">
+        Open to full-stack, healthcare, and backend conversations.
+      </p>
+      <div class="contact-row fade-up">
+        <a href="mailto:MohammadHosseinSalehyNezhad@gmail.com" class="btn">MohammadHosseinSalehyNezhad@gmail.com</a>
+        <a href="https://github.com/Mhsn2005" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
-    <span>© 2026 MHSN</span>
-    <span class="footer-line"></span>
-    <span>BUILT WITH INTENT</span>
+    <span>© 2026 Mohammad Hossein Salehy Nezhad</span>
   </footer>
 
   <script src="script.js"></script>
