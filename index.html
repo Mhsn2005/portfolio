@@ -7,23 +7,22 @@
   <meta name="description" content="Full-stack developer at TRT.co. Healthcare systems, Angular, .NET Core, Three.js. Ranked 26th in Konkoor." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="main.css?v=5" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* Critical layout — guarantees correct render even if external CSS is cached */
     :root {
-      --bg: #0c0c0f;
-      --bg-elevated: #141418;
-      --surface: #1a1a20;
-      --border: rgba(255,255,255,0.08);
-      --border-hover: rgba(255,255,255,0.16);
-      --text: #f2f2f4;
-      --text-muted: #9898a6;
-      --accent: #6ee7b7;
-      --accent-dim: rgba(110,231,183,0.15);
+      --bg: #06060c;
+      --bg-elevated: #0c0c14;
+      --surface: rgba(14, 16, 28, 0.75);
+      --border: rgba(0, 245, 255, 0.12);
+      --border-hot: rgba(255, 45, 149, 0.35);
+      --text: #eef6ff;
+      --text-muted: #7a8a9a;
+      --cyan: #00f5ff;
+      --magenta: #ff2d95;
+      --lime: #b8ff3c;
       --font: 'DM Sans', system-ui, sans-serif;
-      --serif: 'Instrument Serif', Georgia, serif;
-      --radius: 12px;
+      --display: 'Space Grotesk', system-ui, sans-serif;
+      --radius: 4px;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,127 +36,283 @@
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
+
     #bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    /* Scanlines + noise */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px
+      );
+      opacity: 0.35;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Header */
     .header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      height: 64px; padding: 0 2rem;
-      background: rgba(12,12,15,0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid transparent;
+      height: 60px; padding: 0 1.75rem;
+      background: rgba(6, 6, 12, 0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .header.scrolled { border-bottom-color: var(--border); }
-    .logo { font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em; color: var(--text); flex-shrink: 0; }
-    .nav { display: flex; align-items: center; gap: 2rem; }
-    .nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
-    .nav a:hover { color: var(--text); }
+    .logo {
+      font-family: var(--display);
+      font-weight: 700; font-size: 1rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--cyan);
+      text-shadow: 0 0 12px rgba(0, 245, 255, 0.5);
+    }
+    .logo span { animation: blink 1.1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .nav { display: flex; gap: 1.75rem; }
+    .nav a {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .nav a:hover { color: var(--cyan); text-shadow: 0 0 10px rgba(0,245,255,0.4); }
     .nav-toggle {
-      display: none; flex-direction: column; justify-content: center; gap: 6px;
-      background: none; border: none; cursor: pointer; padding: 8px; z-index: 110;
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px; z-index: 110;
     }
-    .nav-toggle span { display: block; width: 20px; height: 1.5px; background: var(--text); }
+    .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--cyan); }
+
+    /* Hero */
     .hero {
       position: relative; z-index: 10; min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
-      padding: 7rem 2rem 5rem; max-width: 920px; margin: 0 auto;
+      padding: 6.5rem 1.75rem 4rem; max-width: 960px; margin: 0 auto;
     }
-    .hero-label { font-size: 0.875rem; font-weight: 500; color: var(--accent); margin-bottom: 1.25rem; }
+    .hero-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--magenta);
+      margin-bottom: 1.25rem;
+      text-shadow: 0 0 16px rgba(255, 45, 149, 0.4);
+    }
     .hero-title {
-      font-family: var(--serif); font-weight: 400;
-      font-size: clamp(2.75rem, 8vw, 4.5rem); line-height: 1.12;
-      letter-spacing: -0.03em; margin-bottom: 1.5rem;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 9vw, 5rem);
+      line-height: 1.05; letter-spacing: -0.03em;
+      margin-bottom: 1.4rem;
+      position: relative;
     }
-    .hero-title em { font-style: italic; color: var(--accent); }
-    .hero-desc { font-size: 1.125rem; color: var(--text-muted); max-width: 34rem; margin-bottom: 2rem; line-height: 1.65; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3rem; }
+    .hero-title em {
+      font-style: normal;
+      color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0, 245, 255, 0.45), 0 0 60px rgba(0, 245, 255, 0.15);
+    }
+    /* Glitch */
+    .hero-title.glitching {
+      animation: glitch 0.25s linear;
+    }
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 1px); text-shadow: -2px 0 var(--magenta), 2px 0 var(--cyan); }
+      40% { transform: translate(3px, -1px); text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan); }
+      60% { transform: translate(-1px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+    .hero-desc {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 34rem; margin-bottom: 2rem; line-height: 1.65;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2.75rem; }
     .btn {
-      display: inline-flex; align-items: center; padding: 0.75rem 1.4rem;
-      font-family: var(--font); font-size: 0.9rem; font-weight: 600;
-      border-radius: 999px; background: var(--accent); color: #0c0c0f;
-      border: 1px solid var(--accent); transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center;
+      padding: 0.7rem 1.35rem;
+      font-family: var(--display); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 2px;
+      background: var(--cyan); color: #06060c;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(110,231,183,0.28); }
-    .btn-outline { background: transparent; color: var(--text); border-color: var(--border-hover); }
-    .btn-outline:hover { border-color: var(--text-muted); box-shadow: none; }
-    .hero-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; font-size: 0.8rem; color: var(--text-muted); }
-    .hero-bar strong { color: var(--text); font-weight: 600; }
-    .hero-bar .sep { width: 4px; height: 4px; border-radius: 50%; background: var(--border-hover); }
-    .section { position: relative; z-index: 10; max-width: 920px; margin: 0 auto; padding: 5rem 2rem; }
+    .btn:hover {
+      transform: translateY(-2px) skewX(-2deg);
+      box-shadow: 0 0 32px rgba(0, 245, 255, 0.45);
+    }
+    .btn-outline {
+      background: transparent; color: var(--cyan);
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: rgba(0, 245, 255, 0.08);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+    }
+    .hero-bar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem;
+      font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-muted);
+      font-family: var(--display);
+    }
+    .hero-bar strong { color: var(--cyan); font-weight: 600; }
+    .hero-bar .sep {
+      width: 5px; height: 5px; background: var(--magenta);
+      box-shadow: 0 0 8px var(--magenta); transform: rotate(45deg);
+    }
+
+    /* Sections */
+    .section {
+      position: relative; z-index: 10;
+      max-width: 960px; margin: 0 auto; padding: 5rem 1.75rem;
+    }
     .section-alt {
-      background: var(--bg-elevated); max-width: none;
-      padding-left: max(2rem, calc((100% - 920px) / 2 + 2rem));
-      padding-right: max(2rem, calc((100% - 920px) / 2 + 2rem));
+      background: linear-gradient(180deg, transparent, rgba(0, 245, 255, 0.02), transparent);
+      max-width: none;
+      padding-left: max(1.75rem, calc((100% - 960px) / 2 + 1.75rem));
+      padding-right: max(1.75rem, calc((100% - 960px) / 2 + 1.75rem));
     }
-    .section-alt .section-head, .section-alt .section-lead, .section-alt .skills-grid {
-      max-width: 920px; margin-left: auto; margin-right: auto;
+    .section-alt .section-head,
+    .section-alt .section-lead,
+    .section-alt .skills-grid {
+      max-width: 960px; margin-left: auto; margin-right: auto;
     }
     .section-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.75rem; }
-    .section-num { font-size: 0.8rem; font-weight: 500; color: var(--accent); }
-    .section-title { font-family: var(--serif); font-weight: 400; font-size: clamp(1.75rem, 4vw, 2.25rem); letter-spacing: -0.02em; }
+    .section-num {
+      font-family: var(--display); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; color: var(--cyan);
+      text-shadow: 0 0 10px rgba(0,245,255,0.4);
+    }
+    .section-title {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      letter-spacing: -0.02em;
+    }
     .section-lead { color: var(--text-muted); font-size: 1.05rem; max-width: 28rem; margin-bottom: 2.5rem; }
+
+    /* Work cards — slightly chaotic */
     .work-group { margin-bottom: 3rem; }
-    .work-group-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .work-group-title {
+      font-family: var(--display); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--magenta); margin-bottom: 1.25rem;
+    }
     .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .work-grid-3 { grid-template-columns: repeat(3, 1fr); }
     .work-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 1.5rem; transition: border-color 0.25s, transform 0.25s var(--ease);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.25s, transform 0.25s var(--ease), box-shadow 0.25s;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
     }
-    .work-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
-    .work-card-top { margin-bottom: 0.75rem; }
+    .work-card:nth-child(even) { transform: translateY(6px); }
+    .work-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-4px) skewX(-0.5deg);
+      box-shadow: -4px 0 24px rgba(0, 245, 255, 0.12), 4px 0 24px rgba(255, 45, 149, 0.06);
+    }
+    .work-card:nth-child(even):hover { transform: translateY(2px) skewX(-0.5deg); }
+    .work-card-top { margin-bottom: 0.7rem; }
     .work-tag {
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-      color: var(--accent); background: var(--accent-dim); padding: 0.25rem 0.55rem; border-radius: 4px;
+      font-family: var(--display); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--cyan); background: rgba(0, 245, 255, 0.08);
+      padding: 0.2rem 0.5rem; border: 1px solid var(--border);
     }
-    .work-card h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .work-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.55; }
-    .work-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .work-card h4 {
+      font-family: var(--display); font-size: 1.05rem; font-weight: 600;
+      margin-bottom: 0.45rem;
+    }
+    .work-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.9rem; line-height: 1.55; }
+    .work-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
     .work-stack span {
-      font-size: 0.75rem; font-weight: 500; color: var(--text-muted);
-      padding: 0.2rem 0.5rem; border: 1px solid var(--border); border-radius: 4px;
+      font-size: 0.7rem; font-weight: 500; color: var(--text-muted);
+      padding: 0.15rem 0.45rem; border: 1px solid var(--border);
     }
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    .skill-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-    .skill-block h3 { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .skill-block {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+      backdrop-filter: blur(8px);
+    }
+    .skill-block:nth-child(2) { border-color: rgba(255, 45, 149, 0.2); }
+    .skill-block h3 {
+      font-family: var(--display); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 1rem;
+    }
+    .skill-block:nth-child(2) h3 { color: var(--magenta); }
     .skill-block ul { list-style: none; }
-    .skill-block li { font-size: 0.95rem; color: var(--text-muted); padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+    .skill-block li {
+      font-size: 0.92rem; color: var(--text-muted);
+      padding: 0.4rem 0; border-bottom: 1px solid var(--border);
+      transition: color 0.2s, padding-left 0.2s;
+    }
     .skill-block li:last-child { border-bottom: none; }
-    .about-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; }
+    .skill-block li:hover { color: var(--text); padding-left: 6px; }
+
+    /* About */
+    .about-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; }
     .about-copy p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.05rem; }
     .about-copy strong { color: var(--text); font-weight: 600; }
     .about-aside {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: var(--radius); padding: 1.4rem;
+      display: flex; flex-direction: column; gap: 1.15rem;
+      box-shadow: -8px 0 30px rgba(0, 245, 255, 0.06);
     }
-    .aside-label { display: block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.2rem; }
+    .aside-label {
+      display: block; font-family: var(--display); font-size: 0.65rem;
+      font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 0.15rem;
+    }
     .aside-value { font-size: 0.95rem; font-weight: 500; color: var(--text); }
-    .section-contact { padding-bottom: 6rem; }
+
+    /* Contact */
+    .section-contact { padding-bottom: 5.5rem; }
     .contact-lead { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.75rem; }
     .contact-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
     .footer {
-      position: relative; z-index: 10; text-align: center; padding: 2rem;
-      border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted);
+      position: relative; z-index: 10; text-align: center; padding: 1.75rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--display); font-size: 0.7rem;
+      letter-spacing: 0.12em; color: var(--text-muted);
     }
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
-    .fade-up.in { opacity: 1; transform: translateY(0); }
+
+    .fade-up {
+      opacity: 0; transform: translateY(28px) skewY(0.5deg);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .fade-up.in { opacity: 1; transform: translateY(0) skewY(0); }
+
     @media (max-width: 800px) {
       .nav {
         position: fixed; top: 0; right: 0; bottom: 0; width: min(280px, 80vw);
         background: var(--bg-elevated); flex-direction: column; align-items: flex-start;
-        padding: 5rem 2rem 2rem; gap: 1.5rem; transform: translateX(100%);
-        transition: transform 0.35s var(--ease); border-left: 1px solid var(--border);
+        padding: 5rem 1.75rem 2rem; gap: 1.5rem;
+        transform: translateX(100%); transition: transform 0.35s var(--ease);
+        border-left: 1px solid var(--border);
       }
       .nav.open { transform: translateX(0); }
       .nav-toggle { display: flex; }
       .work-grid, .work-grid-3, .skills-grid, .about-layout { grid-template-columns: 1fr; }
-      .hero { padding: 6.5rem 1.5rem 4rem; }
-      .section { padding: 4rem 1.5rem; }
-      .section-alt { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .work-card:nth-child(even) { transform: none; }
+      .hero { padding: 6rem 1.25rem 3.5rem; }
+      .section { padding: 4rem 1.25rem; }
+      .section-alt { padding-left: 1.25rem; padding-right: 1.25rem; }
       .header { padding: 0 1.25rem; }
     }
     @media (max-width: 480px) {
-      .hero-title { font-size: 2.35rem; }
+      .hero-title { font-size: 2.3rem; }
     }
   </style>
 </head>
@@ -165,7 +320,7 @@
   <canvas id="bg"></canvas>
 
   <header class="header">
-    <a href="#" class="logo">mhsn</a>
+    <a href="#" class="logo">mhsn<span>_</span></a>
     <nav class="nav" id="nav">
       <a href="#work">Work</a>
       <a href="#skills">Skills</a>
@@ -179,7 +334,7 @@
 
   <main>
     <section class="hero">
-      <p class="hero-label fade-up in">Full-stack Developer · TRT.co · Tehran</p>
+      <p class="hero-label fade-up in">Full-stack // Healthcare // TRT.co</p>
       <h1 class="hero-title fade-up in">
         Mohammad Hossein<br />
         <em>Salehy Nezhad</em>
@@ -195,80 +350,83 @@
       <div class="hero-bar fade-up in">
         <span>Konkoor <strong>#26</strong></span>
         <span class="sep"></span>
-        <span>Amirkabir University of Technology</span>
+        <span>Amirkabir CE</span>
         <span class="sep"></span>
-        <span>CE · Final year</span>
+        <span>Tehran</span>
       </div>
     </section>
 
     <section class="section" id="work">
       <div class="section-head">
-        <span class="section-num">01</span>
+        <span class="section-num">01 —</span>
         <h2 class="section-title">Selected work</h2>
       </div>
+
       <div class="work-group">
-        <h3 class="work-group-title">At TRT.co</h3>
+        <h3 class="work-group-title">// At TRT.co</h3>
         <div class="work-grid">
           <article class="work-card fade-up">
             <div class="work-card-top"><span class="work-tag">Medical · 3D</span></div>
             <h4>3D Anatomical Body</h4>
-            <p>Interactive 3D human body for medical education and visualization. Modeled in Blender, rendered in the browser with Three.js.</p>
+            <p>Interactive 3D human body for medical education. Blender + Three.js in the browser.</p>
             <div class="work-stack"><span>Blender</span><span>Three.js</span><span>WebGL</span></div>
           </article>
           <article class="work-card fade-up">
             <div class="work-card-top"><span class="work-tag">Medical Imaging</span></div>
             <h4>PACS Viewer</h4>
-            <p>Medical imaging viewer for PACS workflows using Cornerstone.js — viewing and interaction with clinical image studies.</p>
+            <p>Clinical imaging viewer for PACS workflows with Cornerstone.js.</p>
             <div class="work-stack"><span>Cornerstone.js</span><span>PACS</span><span>DICOM</span></div>
           </article>
           <article class="work-card fade-up">
             <div class="work-card-top"><span class="work-tag">Hospital Systems</span></div>
             <h4>ShafaPMonitor</h4>
-            <p>Patient status monitoring for hospital kiosks, used by patient companions (همراهان بیمار) on the ground.</p>
+            <p>Patient status monitor for hospital kiosks — used by patient companions.</p>
             <div class="work-stack"><span>Full-stack</span><span>Kiosk UI</span><span>Healthcare</span></div>
           </article>
           <article class="work-card fade-up">
             <div class="work-card-top"><span class="work-tag">In progress</span></div>
             <h4>Medical Voice-to-Text</h4>
-            <p>Speech-to-text pipeline aimed at clinical documentation and medical use cases.</p>
+            <p>Speech-to-text pipeline for clinical documentation.</p>
             <div class="work-stack"><span>Speech</span><span>Medical AI</span></div>
           </article>
         </div>
       </div>
+
       <div class="work-group">
-        <h3 class="work-group-title">Freelance</h3>
+        <h3 class="work-group-title">// Freelance</h3>
         <div class="work-grid">
           <article class="work-card fade-up">
             <div class="work-card-top"><span class="work-tag">B2B · Published</span></div>
             <h4>YazdanParts</h4>
-            <p>End-to-end B2B platform for parts and commerce. Built with Angular and .NET Core, shipped to production.</p>
+            <p>B2B platform for parts & commerce. Angular + .NET Core, shipped.</p>
             <div class="work-stack"><span>Angular</span><span>.NET Core</span><span>SQL Server</span></div>
           </article>
           <article class="work-card fade-up">
             <div class="work-card-top"><span class="work-tag">Sports · Domain</span></div>
             <h4>Netball Federation App</h4>
-            <p>Application development with the Netball Federation — statistics, reporting, and related product work.</p>
-            <div class="work-stack"><span>React</span><span>Domain modeling</span></div>
+            <p>App development with the Netball Federation — stats & reporting.</p>
+            <div class="work-stack"><span>React</span><span>Domain</span></div>
           </article>
         </div>
       </div>
+
       <div class="work-group">
-        <h3 class="work-group-title">Other</h3>
+        <h3 class="work-group-title">// Other</h3>
         <div class="work-grid work-grid-3">
           <article class="work-card fade-up">
             <h4>TOEFL Listening API</h4>
-            <p>Clean Architecture .NET microservice: JWT, audio streaming, scoring, analytics.</p>
-            <div class="work-stack"><span>C#</span><span>ASP.NET Core</span><span>Docker</span></div>
+            <p>Clean Architecture .NET microservice — JWT, audio, scoring.</p>
+            <div class="work-stack"><span>C#</span><span>ASP.NET</span><span>Docker</span></div>
           </article>
           <article class="work-card fade-up">
             <h4>Code Transformer</h4>
-            <p>Multi-language formatter and live diff tool with dark mode.</p>
-            <div class="work-stack"><span>JavaScript</span><span>CodeMirror</span></div>
+            <p>Multi-language formatter & live diff.</p>
+            <div class="work-stack"><span>JS</span><span>CodeMirror</span></div>
           </article>
           <article class="work-card fade-up">
             <h4>Collaborative Drawing</h4>
-            <p>Real-time multi-client canvas with auth and SQLite.</p>
-            <div class="work-stack"><span>Java</span><span>JavaFX</span><span>Sockets</span></div>
+            <p>Real-time multi-client canvas + auth.</p>
+            <div class="work-stack"><span>Java</span><span>JavaFX</span></div>
           </article>
         </div>
       </div>
@@ -276,25 +434,25 @@
 
     <section class="section section-alt" id="skills">
       <div class="section-head">
-        <span class="section-num">02</span>
+        <span class="section-num">02 —</span>
         <h2 class="section-title">Skills</h2>
       </div>
-      <p class="section-lead fade-up">What I use in production and what I reach for when the problem needs it.</p>
+      <p class="section-lead fade-up">What I ship with. What I reach for when the problem demands it.</p>
       <div class="skills-grid">
         <div class="skill-block fade-up">
           <h3>Frontend</h3>
           <ul>
-            <li>Angular</li><li>React</li><li>TypeScript / JavaScript</li><li>Three.js / WebGL</li><li>Cornerstone.js</li>
+            <li>Angular</li><li>React</li><li>TypeScript / JS</li><li>Three.js / WebGL</li><li>Cornerstone.js</li>
           </ul>
         </div>
         <div class="skill-block fade-up">
           <h3>Backend</h3>
           <ul>
-            <li>C# / .NET Core</li><li>ASP.NET Core</li><li>Clean Architecture</li><li>Dapper / SQL Server</li><li>JWT & API design</li>
+            <li>C# / .NET Core</li><li>ASP.NET Core</li><li>Clean Architecture</li><li>Dapper / SQL Server</li><li>JWT & APIs</li>
           </ul>
         </div>
         <div class="skill-block fade-up">
-          <h3>Domain & tools</h3>
+          <h3>Domain</h3>
           <ul>
             <li>Medical imaging (PACS)</li><li>3D (Blender)</li><li>Docker</li><li>Git</li><li>Hospital / kiosk UIs</li>
           </ul>
@@ -304,15 +462,15 @@
 
     <section class="section" id="about">
       <div class="section-head">
-        <span class="section-num">03</span>
+        <span class="section-num">03 —</span>
         <h2 class="section-title">About</h2>
       </div>
       <div class="about-layout">
         <div class="about-copy fade-up">
-          <p>I’m a final-year Computer Engineering student at <strong>Amirkabir University of Technology</strong> (Tehran Polytechnic) and a software developer at <strong>TRT.co</strong>.</p>
+          <p>Final-year CE at <strong>Amirkabir University of Technology</strong>. Developer at <strong>TRT.co</strong>.</p>
           <p>Ranked <strong>26th</strong> in Iran’s National University Entrance Exam (Konkoor).</p>
-          <p>Most of my recent work sits in healthcare and enterprise products: systems that have to be reliable, clear, and usable by non-engineers in real environments (hospitals, kiosks, B2B workflows).</p>
-          <p>I care about clean architecture, maintainable code, and shipping software people actually use.</p>
+          <p>Most of my recent work is healthcare and enterprise: systems that must work for non-engineers in real environments — hospitals, kiosks, B2B.</p>
+          <p>Clean architecture. Maintainable code. Software people actually use.</p>
         </div>
         <aside class="about-aside fade-up">
           <div class="aside-item"><span class="aside-label">Role</span><span class="aside-value">Developer @ TRT.co</span></div>
@@ -325,21 +483,18 @@
 
     <section class="section section-contact" id="contact">
       <div class="section-head">
-        <span class="section-num">04</span>
+        <span class="section-num">04 —</span>
         <h2 class="section-title">Contact</h2>
       </div>
       <p class="contact-lead fade-up">Open to full-stack, healthcare, and backend conversations.</p>
       <div class="contact-row fade-up">
-        <a href="mailto:MohammadHosseinSalehyNezhad@gmail.com" class="btn">MohammadHosseinSalehyNezhad@gmail.com</a>
+        <a href="mailto:MohammadHosseinSalehyNezhad@gmail.com" class="btn">Email</a>
         <a href="https://github.com/Mhsn2005" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <span>© 2026 Mohammad Hossein Salehy Nezhad</span>
-  </footer>
-
-  <script src="script.js?v=5"></script>
+  <footer class="footer">© 2026 MHSN — BUILT WITH INTENT</footer>
+  <script src="script.js?v=7"></script>
 </body>
 </html>
